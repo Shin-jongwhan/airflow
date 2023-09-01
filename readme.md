@@ -5,3 +5,8 @@
 ### <br/><br/><br/>
 
 ## docker bitnami/airflow 로 airflow 구축하기
+### bitnami 에서 관리하는 docker 를 사용한다.
+### 5 millon 이상 다운로드 받을 정도로 굉장히 인기가 많은 image 이다.
+#### https://hub.docker.com/r/bitnami/airflow
+### bitnami 는 여러가지 소프트웨어를 하나로 묶어서 설치할 수 있게 해주는 소프트웨어 패키지이다. 주로 웹서버 구축할 때 사용한다. 
+### 
