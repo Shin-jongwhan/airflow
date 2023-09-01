@@ -102,3 +102,12 @@ docker-compose up -d
 docker-compose down
 ```
 ### <br/>
+
+### airflow 웹서버 실행 확인
+### 먼저 telnet 으로 접속 되는지 확인하였다
+```
+telnet [IP address] [port]
+```
+### 그 다음 웹으로 접속해보았다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/617a766d-8677-4be8-b90f-eb9e2e41fc76)
+### <br/><br/><br/>
