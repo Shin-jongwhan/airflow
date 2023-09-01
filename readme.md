@@ -4,7 +4,7 @@
 ### apache 재단에서 관리한다. 에어비앤비가 복잡해지는 워크플로우를 관리하기 위해서 시작한 프로젝트이다.
 ### <br/><br/><br/>
 
-## docker bitnami/airflow 로 airflow 구축하기
+# docker bitnami/airflow 로 airflow 구축하기
 ### bitnami 에서 관리하는 docker 를 사용한다.
 ### 5 millon 이상 다운로드 받을 정도로 굉장히 인기가 많은 image 이다.
 #### https://hub.docker.com/r/bitnami/airflow
@@ -22,7 +22,7 @@ curl -sSL https://raw.githubusercontent.com/bitnami/containers/main/bitnami/airf
 ```
 ### <br/>
 
-### docker volume 생성
+## docker volume 생성
 ```
 docker volume create jhshin_airflow_postgresql_data
 docker volume create jhshin_airflow_redis_data
@@ -30,7 +30,7 @@ docker volume create jhshin_airflow_redis_data
 #### 
 ### <br/>
 
-### yaml 파일 일부 수정
+## yaml 파일 수정
 ### airflow web server 의 port 는 8080 이 default 허용이다.
 ### 이는 AIRFLOW_WEBSERVER_PORT_NUMBER=8088 와 같이 env 세팅으로 바꿀 수 있다.
 #### 나는 8080 포트가 이미 점유 상태라서, 8088 로 대체하였다.
@@ -105,7 +105,7 @@ docker-compose down
 ```
 ### <br/>
 
-### airflow 웹서버 실행 확인
+## airflow 웹서버 실행 확인
 ### 먼저 telnet 으로 접속 되는지 확인하였다
 ```
 telnet [IP address] [port]
@@ -118,7 +118,7 @@ telnet [IP address] [port]
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/78f5393d-25ed-432d-941e-c3c7fd351667)
 ### <br/>
 
-### 아이디 생성
+## 아이디 생성
 ### docker 환경 접속
 - id : jhshin
 - pw : System!2
@@ -130,9 +130,10 @@ airflow users create --username jhshin --firstname jonghwan --lastname shin --ro
 ```
 ### 접속 확인
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/8c88a843-d344-4b70-bfee-e676256306c1)
+#### * docker-compose 를 껐다 켜도 해당 아이디로 접속이 된다. 왜냐면 아이디는 DB 에 저장되어 있고 docker volume 안에 저장된 데이터이기 때문에 container 가 종료되어도 삭제 안 되고 유지된다.
 ### <br/>
 
-### airflow worker 와 scheduler 에서 에러가 난다.
+## airflow worker 와 scheduler 에서 에러
 ### airflow webserver 를 인식할 수 없다고 한다.
 ### 아마 default port 가 8080 으로 되어 있어서 그런 듯 하다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/b47b11a5-2c98-4644-aeff-a4aa1e36b205)
@@ -148,12 +149,12 @@ airflow users create --username jhshin --firstname jonghwan --lastname shin --ro
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/dc6b9d2d-76cc-45dc-b04b-5674784936e5)
 ### <br/>
 
-### time zone 변경
+## time zone 변경
 ### 여러가지 찾아봤는데 그냥 웹 서버에서 local 로 변경할 수 있다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/e757ab16-dd90-48af-a628-cc666eb2f133)
 ### <br/>
 
-### log 에러 처리
+## log 에러 처리
 ### airflow 관련한 docker 모두에 다음을 똑같이 써준다. key 는 모두 같아야 한다.
 ```
 - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
