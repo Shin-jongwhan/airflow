@@ -114,4 +114,18 @@ telnet [IP address] [port]
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/6c5861fc-15c5-4363-b469-e520cfd86ea4)
 ### 접속 확인
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/78f5393d-25ed-432d-941e-c3c7fd351667)
+### <br/>
+
+### 아이디 생성
+### docker 환경 접속
+- id : jhshin
+- pw : System!2
+```
+# 컨테이너 접속
+docker exec -it [container ID] /bin/bash
+# 아이디 생성
+airflow users create --username jhshin --firstname jonghwan --lastname shin --role Admin --email jhshin@test.com
+```
+### 접속 확인
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/8c88a843-d344-4b70-bfee-e676256306c1)
 ### <br/><br/><br/>
