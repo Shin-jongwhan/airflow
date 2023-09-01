@@ -146,4 +146,9 @@ airflow users create --username jhshin --firstname jonghwan --lastname shin --ro
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/8b8ff647-2ed6-41e9-a925-847e2c0bc358)
 ### 실행하면 왼쪽과 같이 초록색 바가 나타날 것이다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/dc6b9d2d-76cc-45dc-b04b-5674784936e5)
+### <br/>
+
+### time zone 변경
+### 여러가지 찾아봤는데 그냥 웹 서버에서 local 로 변경할 수 있다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/e757ab16-dd90-48af-a628-cc666eb2f133)
 ### <br/><br/><br/>
