@@ -151,4 +151,14 @@ airflow users create --username jhshin --firstname jonghwan --lastname shin --ro
 ### time zone 변경
 ### 여러가지 찾아봤는데 그냥 웹 서버에서 local 로 변경할 수 있다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/e757ab16-dd90-48af-a628-cc666eb2f133)
+### <br/>
+
+### log 에러 처리
+### airflow 관련한 docker 모두에 다음을 똑같이 써준다. key 는 모두 같아야 한다.
+```
+- AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+- AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+```
+### 그럼 이렇게 로그가 조회가 될 것 이다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/9f0ceadc-0ab5-4a18-a261-de77b5461194)
 ### <br/><br/><br/>
