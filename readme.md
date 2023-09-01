@@ -67,6 +67,7 @@ services:
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_WEBSERVER_HOST=airflow
+      - AIRFLOW_WEBSERVER_PORT_NUMBER=8088
   airflow-worker:
     image: docker.io/bitnami/airflow-worker:2
     environment:
@@ -75,6 +76,7 @@ services:
       - AIRFLOW_DATABASE_PASSWORD=bitnami1
       - AIRFLOW_EXECUTOR=CeleryExecutor
       - AIRFLOW_WEBSERVER_HOST=airflow
+      - AIRFLOW_WEBSERVER_PORT_NUMBER=8088
   airflow:
     image: docker.io/bitnami/airflow:2
     environment:
@@ -128,4 +130,20 @@ airflow users create --username jhshin --firstname jonghwan --lastname shin --ro
 ```
 ### 접속 확인
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/8c88a843-d344-4b70-bfee-e676256306c1)
+### <br/>
+
+### airflow worker 와 scheduler 에서 에러가 난다.
+### airflow webserver 를 인식할 수 없다고 한다.
+### 아마 default port 가 8080 으로 되어 있어서 그런 듯 하다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/b47b11a5-2c98-4644-aeff-a4aa1e36b205)
+### docker compose yaml 파일에 scheduler 와 worker 에도 다음을 추가해주자.
+- AIRFLOW_WEBSERVER_PORT_NUMBER=8088
+### healthy 확인
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/844747bc-2ad6-4709-ac52-820ab8f7ba3a)
+### <br/>
+
+### example DAG 를 한 번 실행해보자.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/8b8ff647-2ed6-41e9-a925-847e2c0bc358)
+### 실행하면 왼쪽과 같이 초록색 바가 나타날 것이다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/dc6b9d2d-76cc-45dc-b04b-5674784936e5)
 ### <br/><br/><br/>
