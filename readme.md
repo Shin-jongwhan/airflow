@@ -162,4 +162,10 @@ airflow users create --username jhshin --firstname jonghwan --lastname shin --ro
 ```
 ### 그럼 이렇게 로그가 조회가 될 것 이다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/9f0ceadc-0ab5-4a18-a261-de77b5461194)
+### <br/>
+
+## DAG 실행 예제
+### airflow 는 interactive 하게 현재 진행 중인 상태를 보여준다.
+https://github.com/Shin-jongwhan/airflow/assets/62974484/57af569d-4053-4392-b131-dbda8b0d8e09
+
 ### <br/><br/><br/>
