@@ -110,4 +110,8 @@ telnet [IP address] [port]
 ```
 ### 그 다음 웹으로 접속해보았다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/617a766d-8677-4be8-b90f-eb9e2e41fc76)
+### 기본 접속 id, pw 는 아래와 같다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/6c5861fc-15c5-4363-b469-e520cfd86ea4)
+### 접속 확인
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/78f5393d-25ed-432d-941e-c3c7fd351667)
 ### <br/><br/><br/>
