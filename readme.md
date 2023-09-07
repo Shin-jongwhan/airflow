@@ -267,10 +267,122 @@ volumes:
 https://github.com/Shin-jongwhan/airflow/assets/62974484/57af569d-4053-4392-b131-dbda8b0d8e09
 ### <br/>
 
-## 
+## dag 폴더 연결
+### 1. $AIRFLOW_HOME 이 어딘지 확인한다.
+#### 먼저 docker ps 로 airflow 가 어떤 docker CONTAINER ID 로 실행된지 확인한 후, docekr exec -it 로 접속한다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/83b25799-31d6-4587-8d58-84a4086dd5af)
+### airflow_home 경로에 dag 폴더가 있다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/52deb904-d720-463b-9662-d26698b21f5b)
+### 아래 경로로 docker-compose 에 volume 을 연결하면 된다.
+### 수정된 yaml
+```
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
 
+version: '2'
 
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:15
+    volumes:
+      - 'jhshin_airflow_postgresql_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_DATABASE=bitnami_airflow
+      - POSTGRESQL_USERNAME=bn_airflow
+      - POSTGRESQL_PASSWORD=bitnami1
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+  redis:
+    image: docker.io/bitnami/redis:7.0
+    volumes:
+      - 'jhshin_airflow_redis_data:/bitnami'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+  airflow-scheduler:
+    image: docker.io/bitnami/airflow-scheduler:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=182.162.88.163
+      - AIRFLOW_WEBSERVER_PORT_NUMBER=8088
+      - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+    volumes:
+      - '/TBI/People/tbi/jhshin/script/docker/airflow/dag:/opt/bitnami/airflow/dags'
+  airflow-worker:
+    image: docker.io/bitnami/airflow-worker:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=182.162.88.163
+      - AIRFLOW_WEBSERVER_PORT_NUMBER=8088
+      - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+    volumes:
+        - '/TBI/People/tbi/jhshin/script/docker/airflow/dag:/opt/bitnami/airflow/dags'
+  airflow:
+    image: docker.io/bitnami/airflow:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_PORT_NUMBER=8088
+      - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+    ports:
+      - '8088:8088'
+    volumes:
+        - '/TBI/People/tbi/jhshin/script/docker/airflow/dag:/opt/bitnami/airflow/dags'
+volumes:
+  jhshin_airflow_postgresql_data:
+    driver: local
+  jhshin_airflow_redis_data:
+    driver: local
 
+```
+### <br/>
+
+## DAG 생성 예제
+### 단순히 echo test 만 하는 스크립트를 만들어본다.
+### 로컬에서 작업한다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/d48f1a43-5b97-49d6-8e4e-5262328975a9)
+```
+from datetime import datetime
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+
+default_args = {
+        'owner': 'joo',
+        'email': ['waws01@naver.com'],
+        'email_on_failure': False,
+        'email_on_retry': False,
+        'start_date': datetime(2021,3,5)
+}
+
+with DAG(
+        dag_id='Airflow_first_dag',
+        description='first dag',
+        schedule_interval = '0 10 * * *',
+        default_args=default_args,
+        tags=['test']
+) as dag:
+        t1 = BashOperator(
+                task_id='test',
+                bash_command='echo test',
+                dag=dag
+        )
+
+t1
+```
+### dag 가 웹서버에서도 잘 떴는지 확인한다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/70e6266f-ba9c-4e21-bc8d-6910725b4a75)
+### <br/>
 
 
 
