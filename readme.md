@@ -382,6 +382,8 @@ t1
 ```
 ### dag 가 웹서버에서도 잘 떴는지 확인한다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/70e6266f-ba9c-4e21-bc8d-6910725b4a75)
+### log 를 확인해본다 !
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/9a97e469-910c-4944-8445-3ad6ef45e9c3)
 ### <br/>
 
 
