@@ -160,6 +160,72 @@ airflow users create --username jhshin --firstname jonghwan --lastname shin --ro
 - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
 - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
 ```
+### 수정 yaml
+```
+# Copyright VMware, Inc.
+# SPDX-License-Identifier: APACHE-2.0
+
+version: '2'
+
+services:
+  postgresql:
+    image: docker.io/bitnami/postgresql:15
+    volumes:
+      - 'jhshin_airflow_postgresql_data:/bitnami/postgresql'
+    environment:
+      - POSTGRESQL_DATABASE=bitnami_airflow
+      - POSTGRESQL_USERNAME=bn_airflow
+      - POSTGRESQL_PASSWORD=bitnami1
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+  redis:
+    image: docker.io/bitnami/redis:7.0
+    volumes:
+      - 'jhshin_airflow_redis_data:/bitnami'
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+  airflow-scheduler:
+    image: docker.io/bitnami/airflow-scheduler:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=182.162.88.163
+      - AIRFLOW_WEBSERVER_PORT_NUMBER=8088
+      - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+  airflow-worker:
+    image: docker.io/bitnami/airflow-worker:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_HOST=182.162.88.163
+      - AIRFLOW_WEBSERVER_PORT_NUMBER=8088
+      - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+  airflow:
+    image: docker.io/bitnami/airflow:2
+    environment:
+      - AIRFLOW_DATABASE_NAME=bitnami_airflow
+      - AIRFLOW_DATABASE_USERNAME=bn_airflow
+      - AIRFLOW_DATABASE_PASSWORD=bitnami1
+      - AIRFLOW_EXECUTOR=CeleryExecutor
+      - AIRFLOW_WEBSERVER_PORT_NUMBER=8088
+      - AIRFLOW_FERNET_KEY=46BKJoQYlPPOexq0OhDZnIlNepKFf87WFwLbfzqDDho=
+      - AIRFLOW_SECRET_KEY=a25mQ1FHTUh3MnFRSk5KMEIyVVU2YmN0VGRyYTVXY08=
+    ports:
+      - '8088:8088'
+volumes:
+  jhshin_airflow_postgresql_data:
+    driver: local
+  jhshin_airflow_redis_data:
+    driver: local
+
+```
 ### 그럼 이렇게 로그가 조회가 될 것 이다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/9f0ceadc-0ab5-4a18-a261-de77b5461194)
 ### <br/>
