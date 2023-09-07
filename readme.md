@@ -6,6 +6,7 @@
 - [Airflow 엄청 자세한 튜토리얼 #왕초심자용](https://velog.io/@clueless_coder/Airflow-%EC%97%84%EC%B2%AD-%EC%9E%90%EC%84%B8%ED%95%9C-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-%EC%99%95%EC%B4%88%EC%8B%AC%EC%9E%90%EC%9A%A9)
 - [bitnami/airflow - docker hub](https://hub.docker.com/r/bitnami/airflow)
 - [docker기반 Airflow 2.0 설치](https://burning-dba.tistory.com/127)
+- [airflow - docs](https://airflow.apache.org/docs/apache-airflow/1.10.1/scheduler.html)
 ### <br/><br/><br/>
 
 ## airflow architecture
@@ -32,6 +33,11 @@
 - SqliteOperator : SQL DB 사용과 관련된 작업을 할 때 사용하는 기계
 - SimpleHttpOperator : HTTP 요청(request)을 보내고 응답(response) 텍스트를 받는 작업을 할 때 사용하는 기계
 - HttpSensor : 응답(response)하는지 확인할 때 사용하는 센서 기계
+### <br/><br/><br/>
+
+## scheduler
+### 주기적으로 돌아가게 해야 할 때 아래와 같이 시간 설정을 할 수 있다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/bbddecad-5af7-4caf-a263-c4c974b153dd)
 ### <br/><br/><br/>
 
 --------------------------------------------------------
