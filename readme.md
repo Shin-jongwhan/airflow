@@ -5,7 +5,23 @@
 ### 참고 자료
 - [Airflow 엄청 자세한 튜토리얼 #왕초심자용](https://velog.io/@clueless_coder/Airflow-%EC%97%84%EC%B2%AD-%EC%9E%90%EC%84%B8%ED%95%9C-%ED%8A%9C%ED%86%A0%EB%A6%AC%EC%96%BC-%EC%99%95%EC%B4%88%EC%8B%AC%EC%9E%90%EC%9A%A9)
 - [bitnami/airflow - docker hub](https://hub.docker.com/r/bitnami/airflow)
+- 
 ### <br/><br/><br/>
+
+## airflow architecture
+### airflow 는 다음의 과정으로 분석이 진행된다.
+### 만약 error 가 나면 error alert system 을 거친다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/061a4e44-b7ac-4fd6-b71a-af034f7a666f)
+### airflow 의 구성 요소
+- A `scheduler`, which handles both triggering scheduled workflows, and submitting Tasks to the executor to run.
+- An `executor`, which handles running tasks. In the default Airflow installation, this runs everything inside the scheduler, but most production-suitable executors actually push task execution out to workers.
+- A `webserver`, which presents a handy user interface to inspect, trigger and debug the behaviour of DAGs and tasks.
+- A `folder of DAG file`, read by the scheduler and executor (and any workers the executor has)
+- A `metadata database`, used by the scheduler, executor and webserver to store state.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/103e04dc-426d-4c3f-b3d2-980ddba88cd8)
+### <br/><br/><br/>
+
+--------------------------------------------------------
 
 # docker bitnami/airflow 로 airflow 구축하기
 ### bitnami 에서 관리하는 docker 를 사용한다.
@@ -238,3 +254,13 @@ volumes:
 https://github.com/Shin-jongwhan/airflow/assets/62974484/57af569d-4053-4392-b131-dbda8b0d8e09
 
 ### <br/><br/><br/>
+
+## Operator 종류
+- Action Operator : 간단한 연산 수행 오퍼레이터, airflow.operators 모듈 아래에 존재. 실습에서 사용할 대부분의 오퍼레이터는 여기에 속한다.
+- Transfer Operator : 데이터를 옮기는 오퍼레이터, <출발>To<도착>Operator 꼴.
+- Sensor : 태스크를 언제 실행시킬 트리거(이벤트)를 기다리는 특별한 타입의 오퍼레이터 (예를 들어 어떤 폴더에 데이터가 쌓여지기를 기다린다든지, 요청에 대한 응답이 확인되기를 기다린다든지).
+- PythonOperator : 파이썬 코드를 돌리는 작업을 할 때 사용하는 기계
+- BashOperator : bash 명령어를 실행시키는 작업을 할 때 사용하는 기계
+- SqliteOperator : SQL DB 사용과 관련된 작업을 할 때 사용하는 기계
+- SimpleHttpOperator : HTTP 요청(request)을 보내고 응답(response) 텍스트를 받는 작업을 할 때 사용하는 기계
+- HttpSensor : 응답(response)하는지 확인할 때 사용하는 센서 기계
