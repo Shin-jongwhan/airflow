@@ -459,7 +459,7 @@ docker exec -it airflow_airflow_1 bash -c "airflow dags trigger test_argument_23
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/7be96da4-8bd6-4948-8863-a3b59e756152)
 ### 이제 파라미터와 같이 제출해보자.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/7d04806b-bb9a-4430-b4c0-f4f055ff9c2d)
-#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/d4e69fc5-172e-4f8f-9e13-093d0afe68a3)
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/c4feb911-38e7-4094-bd65-ce4434ce061e)
 ### <br/>
 
 
