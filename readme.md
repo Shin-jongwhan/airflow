@@ -392,6 +392,72 @@ t1
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/9a97e469-910c-4944-8445-3ad6ef45e9c3)
 ### <br/>
 
+## 서버에서 DAG 실행
+### airflow docker 에 명령어를 전달하면 되고, irflow dags trigger 를 사용한다.
+### 스크립트 예제
+```
+from datetime import datetime
+from airflow import DAG
+from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
+
+default_args = {
+    'owner': 'joo',
+    'email': ['waws01@naver.com'],
+    'email_on_failure': False,
+    'email_on_retry': False,
+    'start_date': datetime(2023,9,7)
+}
+
+with DAG(
+    dag_id='test_argument_230908_dag',
+    description='test_argument_230908_dag',
+    schedule_interval = None,
+    default_args=default_args,
+    tags=['test_argument_230908_dag']
+) as dag :
+    ## bash operator 사용시
+    task = BashOperator(
+        task_id="argument_sample_task",
+        bash_command="echo '{{ dag_run.conf['table'] }}'",
+        dag=dag
+    )
+
+task
+
+## 혹은
+#cmd_template = """
+#   echo '{{ dag_run.conf['table'] }}'
+#"""
+
+#task = BashOperator(
+#   task_id="argument_sample_task",
+#   bash_command=cmd_template
+#   dag=dag
+#)
+
+## python operator 사용시
+#def print_arguments(**kwargs):
+#   table_name = kwargs['dag_run'].conf.get('table')
+#   print(table_name)
+
+#task = PythonOperator(
+#   task_id="argument_sample_task",
+#   python_callable=print_arguments,
+#   provide_context=True,                ## 반드시 해당 옵션을 지정해야 함
+#   dag=dag
+#)
+```
+### airflow 실행 예제
+```
+docker exec -it airflow_airflow_1 bash -c "airflow dags trigger test_argument_230908_dag"
+```
+### 작업 제출에 성공한 경우
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/e6ad0df4-6e58-4880-b4f1-1e4e3f94c358)
+### 웹 서버 확인
+### 제출 잘 된다. 에러는 파라미터 제출을 하지 않아서 나는 것이다. 서버에서 파라미터도 제출할 수 있다.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/7be96da4-8bd6-4948-8863-a3b59e756152)
+### <br/>
 
 
 
