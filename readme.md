@@ -457,6 +457,9 @@ docker exec -it airflow_airflow_1 bash -c "airflow dags trigger test_argument_23
 ### 웹 서버 확인
 ### 제출 잘 된다. 에러는 파라미터 제출을 하지 않아서 나는 것이다. 서버에서 파라미터도 제출할 수 있다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/7be96da4-8bd6-4948-8863-a3b59e756152)
+### 이제 파라미터와 같이 제출해보자.
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/7d04806b-bb9a-4430-b4c0-f4f055ff9c2d)
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/d4e69fc5-172e-4f8f-9e13-093d0afe68a3)
 ### <br/>
 
 
