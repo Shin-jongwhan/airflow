@@ -457,9 +457,27 @@ docker exec -it airflow_airflow_1 bash -c "airflow dags trigger test_argument_23
 ### 웹 서버 확인
 ### 제출 잘 된다. 에러는 파라미터 제출을 하지 않아서 나는 것이다. 서버에서 파라미터도 제출할 수 있다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/7be96da4-8bd6-4948-8863-a3b59e756152)
+### <br/>
+
+### 파라미터 제출
 ### 이제 파라미터와 같이 제출해보자.
+### 아래는 docker shell 에 직접 접속해서 제출한 것이다.
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/7d04806b-bb9a-4430-b4c0-f4f055ff9c2d)
 #### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/c4feb911-38e7-4094-bd65-ce4434ce061e)
+### 서버에서 제출하는 방법
+### 테스트 sh script 작성
+#### test_argument_230908.sh
+```
+#!/bin/bash
+airflow dags trigger -c '{"table":"hello world !"}' test_argument_230908_dag
+```
+### 작업 제출하기
+#### * /opt/bitnami/airflow/dags 는 docker-compose yaml 에서 정의한 폴더이다.
+```
+docker exec -it airflow_airflow_1 /bin/bash /opt/bitnami/airflow/dags/test_argument_230908.sh
+```
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/3c34e33c-5971-48d9-9fe4-ecae465cc958)
+#### ![image](https://github.com/Shin-jongwhan/airflow/assets/62974484/963df3dd-6b77-4beb-a5d6-f1feb5e86f1b)
 ### <br/>
 
 
